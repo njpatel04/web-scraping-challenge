@@ -1,5 +1,5 @@
 from splinter import Browser
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 import pandas as pd
 from selenium import webdriver
 import pymongo
@@ -8,7 +8,7 @@ import requests
 def init_browser():
     #Navigating to page
     executable_path = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **executable_path, headless=False)
+    return Browser('chrome', **executable_path, headless=False)
 
 def scrape():
     browser = init_browser()
@@ -18,7 +18,7 @@ def scrape():
 
     #Parsing thorugh HTML
     html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = bs(html, 'html.parser')
 
 
     # NASA Mars News
@@ -32,7 +32,7 @@ def scrape():
     #assign variables to the latest artical title and paragraph
     latest_title = title.a.text
     latest_paragraph = paragraph.text
-
+    #print(latest_paragraph)
 
     # JPL Mars Space Images - Featured Image
     #----------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ def scrape():
 
     #Parsing thorugh HTML
     html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = bs(html, 'html.parser')
 
     first_step = soup.find("div", class_= "carousel_items")
     image_url = first_step.a['data-fancybox-href']
@@ -55,8 +55,7 @@ def scrape():
 
     url = 'https://space-facts.com/mars/'
     raw_table = pd.read_html(url)
-    raw_table
-
+    
     fact_table_df = raw_table[0]
     fact_table_df.columns=["Description", "Values"]
     fact_table_df.set_index("Description", inplace=True)
@@ -73,7 +72,7 @@ def scrape():
 
     #Parsing thorugh HTML
     html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = bs(html, 'html.parser')
 
     results = soup.find_all('div', class_="item")
 
@@ -90,7 +89,7 @@ def scrape():
    
         response = requests.get(page2_img_url)
         response = response.text
-        soup = BeautifulSoup(response, "html.parser")
+        soup = bs(response, "html.parser")
     
         page3_img_url = soup.find("img", class_="wide-image")["src"]
     
