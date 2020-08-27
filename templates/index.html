@@ -10,52 +10,52 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+    <div class="container-fluid">
 
-    <div class="jumbotron text-center">
+        <div class="jumbotron text-center">
 
-      <h1>Mission to Mars</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+          <h1>Mission to Mars</h1>
+          <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     
-    </div>
-
-  </div>
-  
-  <div class="col-md-12">
-    
-    <h2>Latest Mars News </h2>                       
-    <p>{{mars_data.news_title}} </p> 
-    <p>{{mars_data.news_paragraph}}</p>
-  
-  </div>
-
-  <div class="container information">    
-    
-    <div class="row">
-      <!--Featured Mars image-->
-      <div class="col-md-8"> 
-        
-        <div class="col-md-12">
-          
-          <h2>Featured Mars Image </h2>                      
-          <img src="{{mars_data.featured_image_url}}" width="750" height="550" alt="mars featured image">
-        
         </div>
-      </div>
-        
-        <!--Mars data table-->
-      <div class="col-md-4"> 
-        
-        <h2>Mars Facts</h2>
-        
-        <table border="1" style="font-family:tahoma">              
-           
-          {{mars_data.data_table|safe}}
-        
-        </table>      
-      </div>
+
     </div>
-  </div>
+  
+    <div class="col-md-12">
+    
+      <h2>Latest Mars News </h2>                       
+      <p>{{mars_data.news_title}} </p> 
+      <p>{{mars_data.news_paragraph}}</p>
+  
+    </div>
+
+    <div class="container information">    
+    
+        <div class="row">
+            <!--Featured Mars image-->
+            <div class="col-md-8"> 
+        
+                <div class="col-md-12">
+          
+                  <h2>Featured Mars Image </h2>                      
+                  <img src="{{mars_data.featured_image_url}}" width="750" height="550" alt="mars featured image">
+        
+                </div>
+            </div>
+        
+          <!--Mars data table-->
+          <div class="col-md-4"> 
+        
+              <h2>Mars Facts</h2>
+        
+              <table border="1" style="font-family:tahoma">              
+           
+              {{mars_data.data_table|safe}}
+        
+              </table>      
+          </div>
+        </div>
+     </div>
 
   <!--Mars Hemisphere imagies and title for each image-->
   <div class="container" style = "margin-top: 80px;">
@@ -64,18 +64,19 @@
     
     <hr>
     
-    
     <div class ="card">
-      {%for image in mars_data.hemisphere_data %}
-        <div calss = "col-md-6">
+          {%for image in mars_data.hemisphere_data %}
+              <div class = "col-md-6">
          
-            <img class = "thumbnail" src="{{image.img_url}}" width="50%" alt="{{image.title}}">
-              <div class = "caption">
-                <h3>{{image.title}}</h3>
+                  <img class = "thumbnail" src="{{image.img_url}}" width="100%" alt="{{image.title}}">
+
+                      <div class = "caption">
+
+                         <h3>{{image.title}}</h3>
+              
+                      </div>
               </div>
-         
-        </div>
-      {%endfor%}
+          {%endfor%}
     </div>    
       
     <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
